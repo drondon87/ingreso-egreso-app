@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ingreso-egreso-app-c44da": {
+      "hosting": {
+        "ingresoEgresoApp": [
+          "ingreso-egreso-app-c44da"
+        ]
+      }
+    }
+  }
+}
