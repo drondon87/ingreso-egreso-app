@@ -13,25 +13,25 @@ import * as ingEgrActions from '../ingreso-egreso/ingreso-egreso.actions';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  userSubs$: Subscription;
-  ingresosSubs$: Subscription;
+  userSubs: Subscription;
+  ingresosSubs: Subscription;
 
   constructor(private store: Store<AppState>,
               private _ingresoEgresoService: IngresoEgresoService) { }
 
   ngOnInit() {
-    this.userSubs$ = this.store.select('user')
+    this.userSubs = this.store.select('user')
     .pipe(
       filter(auth => auth.user != null)
     ).subscribe (({user}) => {
-        this.ingresosSubs$ =  this._ingresoEgresoService.initIngresosEgresosListener(user.uid)
+        this.ingresosSubs =  this._ingresoEgresoService.initIngresosEgresosListener(user.uid)
           .subscribe(ingresosEgresos => this.store.dispatch(ingEgrActions.setItems({items: ingresosEgresos})));
     });
   }
 
   ngOnDestroy(): void {
-    this.userSubs$.unsubscribe();
-    this.ingresosSubs$.unsubscribe();
+    this.userSubs.unsubscribe();
+    this.ingresosSubs.unsubscribe();
   }
 
 }
